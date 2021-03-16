@@ -1,4 +1,4 @@
-// Exercise 1
+// Exercise 1 -----------------------------------------------------------------------
 const drinks = [
   { name: "lemonade", price: 50 },
   { name: "lime", price: 10 },
@@ -7,61 +7,56 @@ const drinks = [
   { name: "rom", price: 14 },
 ];
 
-function sortDrinkByPrice(drinks) {
-  drinks.sort((a, b) => {
-    if (a.price > b.price) {
-      return 1;
-    } else {
-      return -1;
-    }
-  });
-  console.log(drinks);
-}
+const sortDrinksByPrice = (arr) => arr.sort((a, b) => a.price > b.price);
 
-sortDrinkByPrice(drinks);
+console.log('%c ---------Exercise 1--------- ', 'background: #222; color: #bada55');
+console.log(sortDrinksByPrice(drinks));
 
-// Exercise 2
+// Exercise 2 -----------------------------------------------------------------------
 function detectWord(hiddenWord) {
   let word = hiddenWord
     .split("")
     .filter((letter) => letter === letter.toLowerCase())
     .join("");
-  console.log(word);
+  return word;
 }
 
-detectWord("UcUNFYGaFYFYGtNUH");
-detectWord("bEEFGBuFBRrHgUHlNFYaYr");
-detectWord("YFemHUFBbezFBYzFBYLleGBYEFGBMENTment");
+const word1 = detectWord("UcUNFYGaFYFYGtNUH");
+const word2 = detectWord("bEEFGBuFBRrHgUHlNFYaYr");
+const word3 = detectWord("YFemHUFBbezFBYzFBYLleGBYEFGBMENTment");
+const word4 = detectWord("HDSDIYPjaIDSvaDSDKIOscriIUYBMLOIGpISDGUtRR");
 
-//Exercise 3
+console.log('%c ---------Exercise 2--------- ', 'background: #222; color: #bada55');
+console.table([word1, word2, word3, word4]);
+
+//Exercise 3 -----------------------------------------------------------------------
 
 function isTrue(expression) {
-  if (expression.includes(">") || expression.includes("<")) {
-    console.log(eval(expression));
-  } else if (expression.includes("=")) {
-    expression = expression.split("=");
-    console.log(expression[0] == expression[1]);
-  } else {
-    console.log("The pattern is not respected!");
+  if (expression.match("[0-9]+[<|>|=]+[0-9]")) {
+    const newExpression = expression.replace("=", "===");
+    return eval(newExpression);
   }
+  return "The pattern is not respected!";
 }
 
-isTrue("25>23");
-isTrue("20>23");
-isTrue("22<23");
-isTrue("25<23");
-isTrue("22=23");
-isTrue("22>22");
+console.log('%c ---------Exercise 3--------- ', 'background: #222; color: #bada55');
+console.log(`"25>23" is evaluated to: ${isTrue("25>23")}`);
+console.log(`"20>23" is evaluated to: ${isTrue("20>23")}`);
+console.log(`"22<23" is evaluated to: ${isTrue("22<23")}`);
+console.log(`"25<23" is evaluated to: ${isTrue("25<23")}`);
+console.log(`"22=23" is evaluated to: ${isTrue("22=23")}`);
+console.log(`"22>22" is evaluated to: ${isTrue("22>22")}`);
+console.log(`"22!=22" is evaluated to: ${isTrue("22!=22")}`);
+console.log(`"22222=!" is evaluated to: ${isTrue("22222=!")}`);
 
-// Exercise 4
-let values = [];
+// Exercise 4 -----------------------------------------------------------------------
 
 function showInk(colors) {
+  let values = [];
   for (const key in colors) {
     values.push(colors[key]);
   }
-  console.log(Math.min(...values));
-  values = [];
+  return Math.min(...values);
   // Math.min(...Object.values(colors)) - A much simpler version on the internet of exactly this exercise
 }
 
@@ -83,23 +78,21 @@ const ob3 = {
   yellow: 0,
 };
 
-showInk(ob1);
-showInk(ob2);
-showInk(ob3);
+console.log('%c ---------Exercise 4--------- ', 'background: #222; color: #bada55');
+console.log(`I can print ${showInk(ob1)} pages.`);
+console.log(`I can print ${showInk(ob2)} pages.`);
+console.log(`I can print ${showInk(ob3)} pages.`);
 
-// Exercise 5
+// Exercise 5 -----------------------------------------------------------------------
 
 function set(array) {
-  let newArr = array
+  return array
     .filter((item, index) => array.indexOf(item) === index)
     .sort((a, b) => a - b);
-  console.log(newArr);
 }
 
-set([1, 3, 3, 5, 5]);
-
-set([4, 4, 4, 4]);
-
-set([5, 7, 8, 9, 10, 15]);
-
-set([3, 3, 3, 2, 1]);
+console.log('%c ---------Exercise 5--------- ', 'background: #222; color: #bada55');
+console.log(set([1, 3, 3, 5, 5]));
+console.log(set([4, 4, 4, 4]));
+console.log(set([5, 7, 8, 9, 10, 15]));
+console.log(set([3, 3, 3, 2, 1]));
