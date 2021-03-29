@@ -7,7 +7,7 @@ const drinks = [
   { name: "rom", price: 14 },
 ];
 
-const sortDrinksByPrice = (arr) => arr.sort((a, b) => a.price > b.price);
+const sortDrinksByPrice = (arr) => arr.sort((a, b) => a.price - b.price);
 
 console.log('%c ---------Exercise 1--------- ', 'background: #222; color: #bada55');
 console.log(sortDrinksByPrice(drinks));
