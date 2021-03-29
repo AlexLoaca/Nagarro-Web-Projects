@@ -14,11 +14,10 @@ console.log(sortDrinksByPrice(drinks));
 
 // Exercise 2 -----------------------------------------------------------------------
 function detectWord(hiddenWord) {
-  let word = hiddenWord
+  return hiddenWord
     .split("")
     .filter((letter) => letter === letter.toLowerCase())
     .join("");
-  return word;
 }
 
 const word1 = detectWord("UcUNFYGaFYFYGtNUH");
