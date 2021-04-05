@@ -1,5 +1,5 @@
-let coursesIds = [];
-let studentIds = [];
+const coursesIds = [];
+const studentIds = [];
 
 // Course class
 function Course(id, name, assignedTeacher, studentList) {
@@ -25,23 +25,139 @@ function Course(id, name, assignedTeacher, studentList) {
   this.studentList = studentList;
 }
 
-Course.prototype.addStudent = function(Studentul) {
-  this.studentList.push(Studentul);
-  console.log(`Student with id ${Studentul.id} was successfully added to this course`);
+Course.prototype.addStudent = function(theStudent) {
+  if (typeof(theStudent) !== 'object') {
+    throw("Invalid property type");
+  }
+  if(this.studentList.length) { // check if the array is empty.
+    for(const student of this.studentList) { 
+      if (student.id === theStudent.id) {
+        throw("This student is already enrolled at this course");
+      }
+    }
+  }
+ 
+  theStudent[this.name + 'Grade'] = null;
+  theStudent.courses.push(this.name);
+  this.studentList.push(theStudent);
+  console.log(`Student with id ${theStudent.id} was successfully added to ${this.name} course`);
 }
 
 Course.prototype.deleteStudent = function(studentId) {
-  if (this.studentList.find(el => el.id === studentId)) {
+  const student = this.studentList.find(el => el.id === studentId);
+  if (student) {
+    delete student[this.name + 'Grade'];
     this.studentList = this.studentList.filter(el => el.id !== studentId);
-    studentIds.splice(studentIds.indexOf(studentId), 1);
-    console.log(`Student with id ${studentId} was successfully deleted from this course`);
+    console.log(`Student with id ${studentId} was successfully deleted from this ${this.name} course`);
+    this.averageGrade();
   } else {
     console.error('Student id is invalid resulting in failing to delete the specified student from this course');
   }
 }
 
+Course.prototype.setGrade = function(student, grade) {
+  if (arguments.length < 2) {
+   throw ("One of the required properties is missing");
+  }
+  if (this.studentList.find(el => el === student) && grade >= 1 && grade <= 10){
+    student[this.name + 'Grade'] = grade;
+    console.log(`The student's grade in the ${this.name} course is ${student[this.name + 'Grade']}`);
+    this.averageGrade();
+  } else {
+    throw ("Student and/or grade are invalid!");
+  }
+}
+
+Course.prototype.averageGrade = function(showLogs = true) {
+  const evaluatedStudents = this.studentList.filter(student => !!student[this.name + "Grade"]);
+  if (showLogs) console.log(`For ${this.name} course, we have ${evaluatedStudents.length} students:`);
+  const sum = evaluatedStudents.reduce((accumulator, currentValue) => {
+    if (showLogs) console.log(`${currentValue.firstName} with ${this.name + 'Grade'} = ${currentValue[this.name + 'Grade']}`);
+    return accumulator + currentValue[this.name + "Grade"];
+  }, 0);
+  const average = sum / evaluatedStudents.length;
+  if (showLogs) console.log(`The average grade obtained for ${this.name} course will be ${average}`);
+  return average;
+}
+
 Course.prototype.printStudentList = function() {
   console.log(this.studentList);
+}
+
+Course.prototype.sortStudentsByGrade = function() {
+  this.studentList = this.studentList.sort((a, b) => (a[this.name + "Grade"] < b[this.name + "Grade"]) ? 1 : -1);
+  return this.studentList;
+}
+
+const getStudentsAboveAverage = function(Course) {
+  if (!!Course) {
+    const aboveAverageStudents = Course.studentList.filter(student => student[Course.name + "Grade"] > Course.averageGrade(false));
+    return aboveAverageStudents;
+  } else {
+    throw ('Please provide an existing course!');
+  }
+}
+
+const getFavouriteCourse = function(arrayOfStudents) {
+    let allCourses = [];
+    arrayOfStudents.forEach(student => {
+        allCourses.push(...student.courses);
+    });
+    let x = 1;
+    let y = 0;
+    let favouriteCourse;
+    for (let i = 0; i < allCourses.length; i++) {
+        for (let j = i; j < allCourses.length; j++) {
+            if (allCourses[i] === allCourses[j]) {
+                y++;
+            }
+            if (x < y) {
+                x = y;
+                favouriteCourse = allCourses[i];
+            }
+        }
+        y = 0;
+    }
+    console.log('all: ', allCourses);
+    console.log('fav: ', favouriteCourse);
+}
+
+const getAllStudentsByCourses = function(arrayOfCourses) {
+    let allStudents = [];
+    arrayOfCourses.forEach(course => {
+        allStudents.push(course.studentList);
+    });
+
+    return intersection(allStudents);
+}
+
+
+function intersection() {
+  var result = [];
+  var lists;
+
+  if (arguments.length === 1) {
+    lists = arguments[0];
+  } else {
+    lists = arguments;
+  }
+
+  for (var i = 0; i < lists.length; i++) {
+    var currentList = lists[i];
+    for (var y = 0; y < currentList.length; y++) {
+      var currentValue = currentList[y];
+      if (result.indexOf(currentValue) === -1) {
+        if (
+          lists.filter(function (obj) {
+            return obj.indexOf(currentValue) == -1;
+          }).length == 0
+        ) {
+          result.push(currentValue);
+        }
+      }
+    }
+  }
+  return result;
 }
 
 
@@ -74,8 +190,18 @@ function Student(id, firstName, lastName, gender, address = null, hobbies = null
   this.gender = gender;
   this.address = address;
   this.hobbies = hobbies;
+  this.courses = [];
 }
 
+Student.prototype.enroll = function(...courses) {
+  for (const course of courses) {
+    course.addStudent(this); 
+  }
+}
+
+Student.prototype.dropCourse = function(course) {
+  course.deleteStudent(this.id);
+}
 
 /*
 var historyCourse = new Course(1, 'history', 'Victoria Cobbett', []); //should output 'Course was successfully created'
