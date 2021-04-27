@@ -187,27 +187,26 @@ const getStudentsAboveAverage = function (Course) {
 };
 
 const getFavouriteCourse = function (arrayOfStudents) {
-  let allCourses = [];
+  const allCourses = [];
+  const counts = {};
+  const favouriteCourse = [];
+
   arrayOfStudents.forEach((student) => {
     allCourses.push(...student.courses);
   });
-  let x = 1;
-  let y = 0;
-  let favouriteCourse;
-  for (let i = 0; i < allCourses.length; i++) {
-    for (let j = i; j < allCourses.length; j++) {
-      if (allCourses[i] === allCourses[j]) {
-        y++;
-      }
-      if (x < y) {
-        x = y;
-        favouriteCourse = allCourses[i];
-      }
+
+  // The courses are counted. Added to the 'counts' object. E.g : { history: 3, math: 3, art: 1, english: 2 }
+  allCourses.forEach(function(course) { counts[course] = (counts[course] || 0)+1; });
+  const max = Math.max(...Object.values(counts)) // Taken from the object above the maximum. E.g.: 3
+
+  for (const [key, value] of Object.entries(counts)) {
+    if (value === max) {
+      favouriteCourse.push(key);
     }
-    y = 0;
   }
-  console.log("All: ", allCourses);
-  console.log("Fav: ", favouriteCourse);
+
+  console.log("All courses : ", allCourses);
+  console.log("Favorite courses : ", favouriteCourse);
 };
 
 const getAllStudentsByCourses = function (arrayOfCourses) {
@@ -291,6 +290,7 @@ console.log(martinStudent.hobbies); //should output null
 historyCourse.addStudent(martinStudent); //should output 'Student with id 1 was successfully added to this course'
 historyCourse.addStudent(kellyStudent); //should output 'Student with id 2 was successfully added to this course'
 englishCourse.addStudent(martinStudent); //should output 'Student with id 1 was successfully added to this course'
+englishCourse.addStudent(kellyStudent); //should output 'Student with id 2 was successfully added to this course'
 
 historyCourse.printStudentList();
 //should output
@@ -376,8 +376,12 @@ historyCourse.setGrade(kellyStudent, 9);
 historyCourse.setGrade(martinStudent, 5);
 getStudentsAboveAverage(historyCourse); // Return the students with the course grade bigger than the average course grade
 getFavouriteCourse([Greta, kellyStudent]);
+// All:  Array(4) [ "history", "english", "english", "history" ]
+// Fav:  [ "history", "english" ]
+kellyStudent.dropCourse(englishCourse);
+getFavouriteCourse([Greta, kellyStudent]);
 // All:  Array(3) [ "history", "english", "history" ]
-// Fav:  history
+// Fav:  [history]
 
 mathematicsCourse = new Course(10, "mathematics", "Melania Franck", []);
 let BiologyCourse = new Course(11, "biology", "Josselin Bourseiller", []);
