@@ -37,6 +37,16 @@ input:focus {
   border: 1px solid rgba(30, 144, 255, 1);
 }
 
+input[type="radio"]:focus {
+  box-shadow: none;
+}
+
+select.select-students:focus-visible {
+  outline: none;
+  box-shadow: 0 0 5px rgb(30 144 255);
+  border: 1px solid rgba(30, 144, 255, 1);
+}
+
 .card {
   background: white;
   border-radius: 10px;

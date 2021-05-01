@@ -17,7 +17,7 @@ const addStudentModal = document.getElementById("add-modal-student");
 const startNewStudentButton = document.getElementById("newStudent");
 const cancelAddStudentButton = addStudentModal.querySelector(".btn--passive");
 const confirmAddStudentButton = cancelAddStudentButton.nextElementSibling;
-const inputsOfNewStudent = addStudentModal.querySelectorAll("input"); // si altele mai trebuie
+const inputsOfNewStudent = addStudentModal.querySelectorAll("input"); 
 //Elements for rendering
 const ul = document.querySelector(".courses-list").firstElementChild;
 const dropDownStudentSelect = document.querySelector(".select-students");
@@ -37,7 +37,9 @@ const toggleBackdrop = () => {
 
 const clearInputs = (userInputs) => {
   for (const input of userInputs) {
-    input.value = "";
+    if(!(input.type === 'radio')) {
+      input.value = "";
+    }
   }
 };
 
@@ -73,6 +75,8 @@ const cancelcreateStudentHandler = () => {
   clearInputs(inputsOfNewStudent);
   toggleBackdrop();
 };
+
+// End of Modals
 
 const addCourseHandler = () => {
   const id = parseInt(inputsOfNewCourse[0].value);
@@ -116,12 +120,11 @@ const updateStudentsTable = (navSelectedCourse) => {
   tbody.innerHTML = "";
 
   for (const student of navSelectedCourse.studentList) {
-    // console.log(student);
-    // console.log(table);
+
     let hobbies = student.hobbies
       ? student.hobbies.replace(/[, ]+/g, " ").trim().split(" ")
       : null;
-    // console.log(hobbies);
+
     const row = tbody.insertRow(tbody.rows.length);
     const idCell = row.insertCell(0);
     const firstNameCell = row.insertCell(1);
@@ -152,23 +155,31 @@ const updateStudentsDropdown = (navSelectedCourse) => {
       )
     : listOfStudents;
 
-  dropDownStudentSelect.innerHTML = "";
+  dropDownStudentSelect.innerHTML = `<option value="" selected hidden class="selected-default">Add to the course</option>`;
 
   unassignedStudents.forEach((student) => {
     const newOption = document.createElement("option");
     newOption.value = student.id;
     newOption.text = `${student.firstName} ${student.lastName}`;
-    newOption.addEventListener("click", () => {
-      if (navSelectedCourse) {
-        navSelectedCourse.addStudent(student);
-        updateStudentsTable(navSelectedCourse);
-        updateStudentsDropdown(navSelectedCourse);
-      }
-    });
 
     dropDownStudentSelect.add(newOption);
   });
+
 };
+
+function selectValueHasChanged() {
+  let student;
+  for (const wantedStudent of listOfStudents) {
+      if(wantedStudent.id == dropDownStudentSelect.value) {
+        student = wantedStudent;
+      }
+  }
+  if (currentCourse) {
+    currentCourse.addStudent(student);
+    updateStudentsTable(currentCourse);
+    updateStudentsDropdown(currentCourse);
+  }
+}
 
 const createStudentHandler = () => {
   const id = parseInt(inputsOfNewStudent[0].value);
@@ -203,7 +214,6 @@ const createStudentHandler = () => {
   cancelcreateStudentHandler();
 
   updateStudentsDropdown(currentCourse);
-  // console.log('list of students: ', listOfStudents);
 };
 
 const removeStudentHandler = (studentId) => {
@@ -217,7 +227,7 @@ const removeStudentHandler = (studentId) => {
     updateStudentsDropdown(currentCourse);
     updateStudentsTable(currentCourse);
   } else {
-    console.log("you change4d your mind");
+    console.log("you changed your mind");
   }
 };
 
@@ -231,3 +241,5 @@ confirmAddCourseButton.addEventListener("click", addCourseHandler);
 startNewStudentButton.addEventListener("click", showStudentModal);
 cancelAddStudentButton.addEventListener("click", cancelcreateStudentHandler);
 confirmAddStudentButton.addEventListener("click", createStudentHandler);
+
+dropDownStudentSelect.addEventListener("change", selectValueHasChanged);
