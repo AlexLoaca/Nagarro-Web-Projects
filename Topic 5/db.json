@@ -1,0 +1,122 @@
+{
+  "courses": [
+    {
+      "id": 1,
+      "name": "history",
+      "assignedTeacher": "Victoria Cobbett",
+      "studentList": [
+        {
+          "id": 2,
+          "firstName": "Martin2",
+          "lastName": "Lawrence2",
+          "gender": "M",
+          "address": null,
+          "hobbies": null,
+          "courses": [
+            "english",
+            "history"
+          ],
+          "englishGrade": null,
+          "historyGrade": null
+        },
+        {
+          "id": 1,
+          "firstName": "Martin3",
+          "lastName": "Lawrence3",
+          "gender": "M",
+          "address": null,
+          "hobbies": null,
+          "courses": [
+            "history"
+          ],
+          "historyGrade": null
+        },
+        {
+          "id": 12,
+          "firstName": "Alex",
+          "lastName": "Mihai",
+          "gender": "M",
+          "address": null,
+          "hobbies": null,
+          "courses": [
+            "english",
+            "history"
+          ],
+          "englishGrade": null,
+          "historyGrade": null
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "english",
+      "assignedTeacher": "Victoria Cobbett",
+      "studentList": [
+        {
+          "id": 3,
+          "firstName": "Martin10",
+          "lastName": "Lawrence10",
+          "gender": "M",
+          "address": null,
+          "hobbies": null,
+          "courses": [
+            "history",
+            "english"
+          ],
+          "historyGrade": null,
+          "englishGrade": null
+        }
+      ]
+    }
+  ],
+  "students": [
+    {
+      "id": 1,
+      "firstName": "Martin3",
+      "lastName": "Lawrence3",
+      "gender": "M",
+      "address": null,
+      "hobbies": null,
+      "courses": [
+        "history"
+      ],
+      "historyGrade": null
+    },
+    {
+      "id": 2,
+      "firstName": "Martin2",
+      "lastName": "Lawrence2",
+      "gender": "M",
+      "address": null,
+      "hobbies": null,
+      "courses": [
+        "history"
+      ],
+      "historyGrade": null
+    },
+    {
+      "id": 3,
+      "firstName": "Martin10",
+      "lastName": "Lawrence10",
+      "gender": "M",
+      "address": null,
+      "hobbies": null,
+      "courses": [
+        "english"
+      ],
+      "englishGrade": null
+    },
+    {
+      "id": 12,
+      "firstName": "Alex",
+      "lastName": "Mihai",
+      "gender": "M",
+      "address": null,
+      "hobbies": null,
+      "courses": [
+        "history"
+      ],
+      "historyGrade": null
+    }
+  ]
+}
