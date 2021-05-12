@@ -183,6 +183,10 @@ select.select-students:focus-visible {
   width: 60%;
 }
 
+.header-text-logo h1 {
+  padding: 0px 10px;
+}
+
 video {
   object-fit: cover;
   width: 100%;

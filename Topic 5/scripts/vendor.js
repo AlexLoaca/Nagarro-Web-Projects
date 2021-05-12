@@ -1,9 +1,13 @@
 const studentIds = [];
 
 function Course(name, assignedTeacher) {
-  if (name == "" || name == null ||
-      assignedTeacher == "" || assignedTeacher == null 
-  ) throw "Required property is missing";
+  if (
+    name == "" ||
+    name == null ||
+    assignedTeacher == "" ||
+    assignedTeacher == null
+  )
+    throw "Required property is missing";
   if (typeof name !== "string" || typeof assignedTeacher !== "string")
     throw "Invalid property type";
 

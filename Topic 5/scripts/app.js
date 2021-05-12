@@ -1,4 +1,5 @@
 import * as vendor from "./vendor.js";
+import * as apiRequest from "./httpRequests.js";
 
 // Array to keep courses
 const listOfCourses = [];
@@ -26,32 +27,9 @@ const table = document.getElementById("the-table-of-students");
 const unselectedCourseImage = document.querySelector(
   ".no-courses-selected-section"
 );
-// API links
-const studentsApi = "http://localhost:3000/students";
-const coursesApi = "http://localhost:3000/courses";
+
 // Selected course from navigation
 let currentCourse;
-
-// API Methods / HTTP Requests
-const fetchCoursesAndStudents = () => {
-  return axios.all([axios.get(coursesApi), axios.get(studentsApi)]);
-};
-const postNewCourse = (newCourse) => {
-  return axios.post(coursesApi, newCourse);
-};
-const postNewStudent = (newStudent) => {
-  return axios.post(studentsApi, newStudent);
-};
-const fetchStudents = () => {
-  return axios.get(studentsApi);
-};
-
-const updateStudentAndCourse = (studentId, student, courseId, course) => {
-  return axios.all([
-    axios.put(studentsApi + "/" + studentId, student),
-    axios.put(coursesApi + "/" + courseId, course),
-  ]);
-};
 
 // Modals
 const backdropClickHandler = () => {
@@ -107,8 +85,7 @@ const cancelcreateStudentHandler = () => {
 
 const updateListOfStudents = async () => {
   try {
-    const response = await fetchStudents();
-    // const response = await axios.get(studentsApi);
+    const response = await apiRequest.fetchStudents();
     listOfStudents = response.data;
     return console.log(response, listOfStudents);
   } catch (error) {
@@ -120,7 +97,7 @@ const updateUi = async () => {
   if (!currentCourse) {
     tableSection.classList.add("hidden");
   }
-  await fetchCoursesAndStudents()
+  await apiRequest.fetchCoursesAndStudents()
     .then(
       axios.spread((courses, students) => {
         ul.innerHTML = "";
@@ -157,13 +134,9 @@ const addCourseHandler = async () => {
   try {
     newCourse = new vendor.Course(courseName, assignedTeacher);
 
-    await postNewCourse(newCourse);
-    // await axios.post(coursesApi, newCourse);
+    await apiRequest.postNewCourse(newCourse);
     await updateUi();
-    console.log(ul.lastElementChild);
     ul.lastElementChild.click();
-    // const tbody = table.querySelector("tbody");
-    // tbody.innerHTML = "";
   } catch (error) {
     const showError = document.getElementById("show-error-course");
     const wrapperError = showError.closest(".errors-wrapper");
@@ -254,12 +227,7 @@ function selectValueHasChanged() {
   }
   if (currentCourse) {
     currentCourse.addStudent(student);
-    // axios
-    //   .all([
-    //     axios.put(studentsApi + "/" + student.id, student),
-    //     axios.put(coursesApi + "/" + currentCourse.id, currentCourse),
-    //   ])
-    updateStudentAndCourse(student.id, student, currentCourse.id, currentCourse)
+    apiRequest.updateStudentAndCourse(student.id, student, currentCourse.id, currentCourse)
       .then(() => {
         updateStudentsTable(currentCourse);
         updateStudentsDropdown(currentCourse);
@@ -305,9 +273,7 @@ const createStudentHandler = () => {
     return console.error(error);
   }
 
-  // axios
-  //   .post(studentsApi, newStudent)
-  postNewStudent(newStudent)
+  apiRequest.postNewStudent(newStudent)
     .then(() => {
       cancelcreateStudentHandler();
       updateStudentsDropdown(currentCourse);
@@ -335,12 +301,8 @@ const removeStudentHandler = (studentId) => {
   ) {
     const updatedStudent = listOfStudents.find((el) => el.id === studentId);
     const [course, student] = currentCourse.deleteStudent(updatedStudent);
-    // axios
-    //   .all([
-    //     axios.put(studentsApi + "/" + student.id, student),
-    //     axios.put(coursesApi + "/" + course.id, course),
-    //   ])
-    updateStudentAndCourse(student.id, student, course.id, course).then(() => {
+
+    apiRequest.updateStudentAndCourse(student.id, student, course.id, course).then(() => {
       updateStudentsTable(currentCourse);
       updateStudentsDropdown(currentCourse);
     });
