@@ -418,6 +418,10 @@ select:focus {
   flex-basis: 100%;
 }
 
+.students-table.hidden {
+  display: none;
+}
+
 .students-table {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
   border-radius: 2px;
@@ -453,6 +457,21 @@ td i {
   to {
     transform: translateY(0);
   }
+}
+
+.no-courses-selected-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.no-courses-selected-section img {
+  width: 100%;
+  max-width: 600px;
+}
+
+.no-courses-selected-section.hidden {
+  display: none;
 }
 
 @media all and (max-width: 1012px) {
