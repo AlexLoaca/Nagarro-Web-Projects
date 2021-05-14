@@ -11,13 +11,13 @@ const backdrop = document.getElementById("backdrop");
 const addCourseModal = document.getElementById("add-modal-course");
 const startNewCourseButton = document.getElementById("newCourse");
 const cancelAddCourseButton = addCourseModal.querySelector(".btn--passive");
-const confirmAddCourseButton = cancelAddCourseButton.nextElementSibling;
+const formCourse = document.getElementById("form-course");
 const inputsOfNewCourse = addCourseModal.querySelectorAll("input");
 // Modal query for Student
 const addStudentModal = document.getElementById("add-modal-student");
 const startNewStudentButton = document.getElementById("newStudent");
 const cancelAddStudentButton = addStudentModal.querySelector(".btn--passive");
-const confirmAddStudentButton = cancelAddStudentButton.nextElementSibling;
+const formStudent = document.getElementById("student-form");
 const inputsOfNewStudent = addStudentModal.querySelectorAll("input");
 //Elements for rendering
 let ul = document.querySelector(".courses-list").firstElementChild;
@@ -127,8 +127,9 @@ const addCourseIntoNav = (course) => {
 };
 
 const addCourseHandler = async () => {
-  const courseName = inputsOfNewCourse[0].value.trim();
-  const assignedTeacher = inputsOfNewCourse[1].value.trim();
+  const data = new FormData(formCourse);
+  const courseName = data.get('courseName').trim();
+  const assignedTeacher = data.get('assignedTeacher').trim();
   let newCourse;
 
   try {
@@ -237,20 +238,13 @@ function selectValueHasChanged() {
 }
 
 const createStudentHandler = () => {
-  const firstName = inputsOfNewStudent[0].value.trim();
-  const lastName = inputsOfNewStudent[1].value.trim();
-  const gender =
-    !inputsOfNewStudent[2].checked && !inputsOfNewStudent[3].checked
-      ? null
-      : inputsOfNewStudent[2].checked
-      ? inputsOfNewStudent[2].value.trim()
-      : inputsOfNewStudent[3].value.trim();
-  const address = inputsOfNewStudent[4].value.trim()
-    ? inputsOfNewStudent[4].value.trim()
-    : null;
-  const hobbies = inputsOfNewStudent[5].value.trim()
-    ? inputsOfNewStudent[5].value.trim()
-    : null;
+  const data = new FormData(formStudent);
+  const firstName = data.get("firstName").trim();
+  const lastName = data.get("lastName").trim();
+  const gender = data.get("gender").trim();
+  const address = data.get("address").trim();
+  const hobbies = data.get("hobbies").trim();
+
   let newStudent;
 
   try {
@@ -315,12 +309,24 @@ const removeStudentHandler = (studentId) => {
 backdrop.addEventListener("click", backdropClickHandler);
 // Modal Events - Course
 startNewCourseButton.addEventListener("click", showCourseModal);
-cancelAddCourseButton.addEventListener("click", cancelAddCourseHandler);
-confirmAddCourseButton.addEventListener("click", addCourseHandler);
+cancelAddCourseButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  cancelAddCourseHandler();
+});
+formCourse.addEventListener("submit", (e) => {
+  e.preventDefault();
+  addCourseHandler();
+});
 // Modal Events - Student
 startNewStudentButton.addEventListener("click", showStudentModal);
-cancelAddStudentButton.addEventListener("click", cancelcreateStudentHandler);
-confirmAddStudentButton.addEventListener("click", createStudentHandler);
+cancelAddStudentButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  cancelcreateStudentHandler();
+});
+formStudent.addEventListener("submit", (e) => {
+  e.preventDefault();
+  createStudentHandler();
+});
 // Render Elements Events
 dropDownStudentSelect.addEventListener("change", selectValueHasChanged);
 window.onload = updateUi;
