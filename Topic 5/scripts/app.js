@@ -1,6 +1,8 @@
 import * as vendor from "./vendor.js";
 import * as apiRequest from "./httpRequests.js";
-
+import * as showAlert from "./toast.js";
+// showAlert.Toast.init();
+// showAlert.Toast.show('message','success');
 // Array to keep courses
 const listOfCourses = [];
 let listOfStudents = [];
@@ -97,7 +99,8 @@ const updateUi = async () => {
   if (!currentCourse) {
     tableSection.classList.add("hidden");
   }
-  await apiRequest.fetchCoursesAndStudents()
+  await apiRequest
+    .fetchCoursesAndStudents()
     .then(
       axios.spread((courses, students) => {
         ul.innerHTML = "";
@@ -128,14 +131,21 @@ const addCourseIntoNav = (course) => {
 
 const addCourseHandler = async () => {
   const data = new FormData(formCourse);
-  const courseName = data.get('courseName').trim();
-  const assignedTeacher = data.get('assignedTeacher').trim();
+  const courseName = data.get("courseName").trim();
+  const assignedTeacher = data.get("assignedTeacher").trim();
   let newCourse;
 
   try {
     newCourse = new vendor.Course(courseName, assignedTeacher);
 
-    await apiRequest.postNewCourse(newCourse);
+    await apiRequest
+      .postNewCourse(newCourse)
+      .then(() =>
+        showAlert.Toast.show(
+          `The ${newCourse.name} course has been created.`,
+          "success"
+        )
+      );
     await updateUi();
     ul.lastElementChild.click();
   } catch (error) {
@@ -228,11 +238,23 @@ function selectValueHasChanged() {
   }
   if (currentCourse) {
     currentCourse.addStudent(student);
-    apiRequest.updateStudentAndCourse(student.id, student, currentCourse.id, currentCourse)
+    apiRequest
+      .updateStudentAndCourse(
+        student.id,
+        student,
+        currentCourse.id,
+        currentCourse
+      )
       .then(() => {
         updateStudentsTable(currentCourse);
         updateStudentsDropdown(currentCourse);
       })
+      .then(() =>
+        showAlert.Toast.show(
+          `${student.lastName} joined the ${currentCourse.name} course.`,
+          "success"
+        )
+      )
       .catch((err) => console.log(err));
   }
 }
@@ -267,11 +289,18 @@ const createStudentHandler = () => {
     return console.error(error);
   }
 
-  apiRequest.postNewStudent(newStudent)
+  apiRequest
+    .postNewStudent(newStudent)
     .then(() => {
       cancelcreateStudentHandler();
       updateStudentsDropdown(currentCourse);
     })
+    .then(() =>
+      showAlert.Toast.show(
+        `Student ${newStudent.lastName} was created.`,
+        "success"
+      )
+    )
     .catch((err) => {
       const showError = document.getElementById("show-error");
       const wrapperError = showError.closest(".errors-wrapper");
@@ -296,10 +325,18 @@ const removeStudentHandler = (studentId) => {
     const updatedStudent = listOfStudents.find((el) => el.id === studentId);
     const [course, student] = currentCourse.deleteStudent(updatedStudent);
 
-    apiRequest.updateStudentAndCourse(student.id, student, course.id, course).then(() => {
-      updateStudentsTable(currentCourse);
-      updateStudentsDropdown(currentCourse);
-    });
+    apiRequest
+      .updateStudentAndCourse(student.id, student, course.id, course)
+      .then(() => {
+        updateStudentsTable(currentCourse);
+        updateStudentsDropdown(currentCourse);
+      })
+      .then(() =>
+        showAlert.Toast.show(
+          `${updatedStudent.lastName} no longer attends ${currentCourse.name} classes.`,
+          "success"
+        )
+      );
   } else {
     console.log("you changed your mind");
   }
@@ -329,4 +366,7 @@ formStudent.addEventListener("submit", (e) => {
 });
 // Render Elements Events
 dropDownStudentSelect.addEventListener("change", selectValueHasChanged);
-window.onload = updateUi;
+window.onload = () => {
+  updateUi();
+  showAlert.Toast.init();
+};
