@@ -10,7 +10,10 @@
     <link rel="stylesheet" href="css/style.css" />
     <script type="module" src="scripts/app.js" defer></script>
     <!-- Fonts and Icons -->
-    <script src="https://kit.fontawesome.com/1abf0e7a20.js" crossorigin="anonymous"></script>
+    <script
+      src="https://kit.fontawesome.com/1abf0e7a20.js"
+      crossorigin="anonymous"
+    ></script>
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
@@ -43,12 +46,12 @@
         <label for="lastName">Last Name</label>
         <input type="text" name="lastName" id="lastName" />
         <div class="radio-gender">
-          <div class="radio__male"> 
-            <input type="radio" id="male" name="gender" value="M" checked>
+          <div class="radio__male">
+            <input type="radio" id="male" name="gender" value="M" checked />
             <label for="male">M</label>
           </div>
           <div class="radio__female">
-            <input type="radio" id="female" name="gender" value="F">
+            <input type="radio" id="female" name="gender" value="F" />
             <label for="female">F</label>
           </div>
         </div>
@@ -80,30 +83,36 @@
         <div class="courses-logo btnCreate" id="newCourse">
           <h2>New Course</h2>
         </div>
-       <nav class="courses-list">
-            <ul>
-            </ul>
+        <nav class="courses-list">
+          <ul></ul>
         </nav>
       </section>
 
+      <div class="no-courses-selected-section">
+        <img src="media/select.png" alt="no-courses-selected" />
+      </div>
+
       <section class="students-table">
         <div class="student-options">
-            <div class="assigned-teacher">
-                <p>Teacher:</p>
-                <h3></h3>
+          <div class="assigned-teacher">
+            <p>Teacher:</p>
+            <h3></h3>
+          </div>
+          <div class="create-add-students">
+            <div class="custom-select">
+              <select name="select-students" class="select-students">
+                <option value="" selected hidden class="selected-default">
+                  Add to the course
+                </option>
+              </select>
+              <span class="custom-arrow"></span>
             </div>
-            <div class="create-add-students">
-                <div class="custom-select"> 
-                    <select name="select-students" class="select-students">
-                        <option value="" selected hidden class="selected-default">Add to the course</option>
-                    </select>
-                    <span class="custom-arrow"></span>
-                </div>
-                <div class="btnCreate">
-                    <button class="create-students" id="newStudent">Create Student</button>
-                </div>
-                
+            <div class="btnCreate">
+              <button class="create-students" id="newStudent">
+                Create Student
+              </button>
             </div>
+          </div>
         </div>
         <table id="the-table-of-students">
           <thead>
@@ -117,8 +126,7 @@
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody>
-          </tbody>
+          <tbody></tbody>
         </table>
       </section>
     </main>

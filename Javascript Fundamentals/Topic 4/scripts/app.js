@@ -17,11 +17,15 @@ const addStudentModal = document.getElementById("add-modal-student");
 const startNewStudentButton = document.getElementById("newStudent");
 const cancelAddStudentButton = addStudentModal.querySelector(".btn--passive");
 const confirmAddStudentButton = cancelAddStudentButton.nextElementSibling;
-const inputsOfNewStudent = addStudentModal.querySelectorAll("input"); 
+const inputsOfNewStudent = addStudentModal.querySelectorAll("input");
 //Elements for rendering
 const ul = document.querySelector(".courses-list").firstElementChild;
 const dropDownStudentSelect = document.querySelector(".select-students");
+const tableSection = document.querySelector(".students-table");
 const table = document.getElementById("the-table-of-students");
+const unselectedCourseImage = document.querySelector(
+  ".no-courses-selected-section"
+);
 
 let currentCourse;
 
@@ -37,7 +41,7 @@ const toggleBackdrop = () => {
 
 const clearInputs = (userInputs) => {
   for (const input of userInputs) {
-    if(!(input.type === 'radio')) {
+    if (!(input.type === "radio")) {
       input.value = "";
     }
   }
@@ -78,6 +82,12 @@ const cancelcreateStudentHandler = () => {
 
 // End of Modals
 
+const updateUi = () => {
+  if (!currentCourse) {
+    tableSection.classList.add("hidden");
+  }
+};
+
 const addCourseHandler = () => {
   const id = parseInt(inputsOfNewCourse[0].value);
   const courseName = inputsOfNewCourse[1].value;
@@ -108,6 +118,10 @@ const addCourseHandler = () => {
 
 const changeCourseHandler = (navSelectedCourse) => {
   currentCourse = navSelectedCourse;
+  if (currentCourse) {
+    unselectedCourseImage.classList.add("hidden");
+    tableSection.classList.remove("hidden");
+  }
   updateStudentsTable(navSelectedCourse);
   updateStudentsDropdown(navSelectedCourse);
 };
@@ -120,7 +134,6 @@ const updateStudentsTable = (navSelectedCourse) => {
   tbody.innerHTML = "";
 
   for (const student of navSelectedCourse.studentList) {
-
     let hobbies = student.hobbies
       ? student.hobbies.replace(/[, ]+/g, " ").trim().split(" ")
       : null;
@@ -164,15 +177,14 @@ const updateStudentsDropdown = (navSelectedCourse) => {
 
     dropDownStudentSelect.add(newOption);
   });
-
 };
 
 function selectValueHasChanged() {
   let student;
   for (const wantedStudent of listOfStudents) {
-      if(wantedStudent.id == dropDownStudentSelect.value) {
-        student = wantedStudent;
-      }
+    if (wantedStudent.id == dropDownStudentSelect.value) {
+      student = wantedStudent;
+    }
   }
   if (currentCourse) {
     currentCourse.addStudent(student);
@@ -241,5 +253,8 @@ confirmAddCourseButton.addEventListener("click", addCourseHandler);
 startNewStudentButton.addEventListener("click", showStudentModal);
 cancelAddStudentButton.addEventListener("click", cancelcreateStudentHandler);
 confirmAddStudentButton.addEventListener("click", createStudentHandler);
-
+// Render Elements
 dropDownStudentSelect.addEventListener("change", selectValueHasChanged);
+window.onload = () => {
+  updateUi();
+};

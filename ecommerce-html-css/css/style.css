@@ -1,0 +1,1331 @@
+/* Colors */
+:root {
+  --black: #1b1642;
+  --blue-navy: #00325f;
+  --grey: #6c757d;
+  --grey-light: #f8f9fa;
+  --white: #ffffff;
+  --yellow: #ffb33c;
+  --separation-padding: 60px 0;
+}
+/* General properties  */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #00325f;
+  font-family: "DM Sans", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "DM Serif Display", serif;
+  color: var(--black);
+}
+
+body {
+  max-width: 2500px;
+  margin: auto;
+}
+
+/*!!!----------------- S-1 Navigation Bar ---------------!!!*/
+header {
+  width: 100%;
+  height: 100vh;
+  padding: 10px 60px;
+  color: var(--black);
+  background: linear-gradient(to right, #ffffff, #ece9e6);
+}
+
+nav {
+  margin: auto;
+  display: flex;
+  align-items: center;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.nav-links li a {
+  color: var(--black);
+  text-decoration: none;
+  font-size: 17px;
+  padding: 0px 15px;
+  font-family: "DM Serif Display";
+}
+
+.nav-links li a:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--yellow);
+  text-decoration-thickness: 4px;
+}
+
+.logo-container,
+.nav-links,
+.nav-icons {
+  display: flex;
+}
+
+.logo-links-pack {
+  display: flex;
+  height: 100%;
+}
+
+.nav-icons {
+  height: 100%;
+  justify-content: flex-end;
+  align-items: center;
+  margin-left: auto;
+}
+
+.nav-icons i {
+  padding: 0px 10px;
+}
+
+.logo-container img {
+  width: 80px;
+}
+
+.icon-container {
+  position: relative;
+  font-size: 20px;
+}
+
+.icon-container:hover {
+  cursor: pointer;
+}
+
+.icon-badge {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: var(--yellow);
+  color: var(--white);
+  text-align: center;
+  font-size: 12px;
+  top: -6px;
+  right: 9px;
+  font-weight: bold;
+  font-family: "DM Serif Display", serif;
+}
+/*!!!----------------- End of Navigation Bar ---------------!!!*/
+
+/*!!!----------------- Presentation Header ---------------!!!*/
+.presentation {
+  display: flex;
+  height: calc(100vh - 100px);
+  align-items: center;
+  flex-flow: row wrap;
+}
+
+.introduction {
+  flex: 1;
+  max-width: 40%;
+}
+
+.intro-text {
+  max-width: 85%;
+}
+
+.intro-text h1 {
+  font-size: 6.5vh;
+  font-weight: 400;
+  padding-bottom: 20px;
+  line-height: 1.1;
+}
+
+@supports (font-size: clamp(45px, 3.5vw, 60px)) {
+  .intro-text h1 {
+    font-size: clamp(45px, 3.5vw, 60px);
+    line-height: 1.3;
+  }
+}
+
+.intro-text p {
+  line-height: 30px;
+  font-size: 20px;
+}
+
+.ecm-button {
+  cursor: pointer;
+  width: 172px;
+  height: 57px;
+  border-radius: 0.25rem;
+  font-size: 16px;
+  margin-top: 40px;
+  transition: transform 0.5s;
+}
+
+.ecm-button:hover {
+  position: relative;
+  transform: translateY(-5px);
+}
+
+.ecm-button--black {
+  background-color: var(--black);
+  border: var(--black);
+  color: var(--white);
+}
+
+.ecm-button--black:hover {
+  background-color: var(--blue-navy);
+}
+
+.cover {
+  flex: 1;
+  max-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cover img {
+  height: 100%;
+  width: 100%;
+}
+/*!!!----------------- End of S-1 Presentation Header ---------------!!!*/
+
+/*!!!----------------- S-2 Gender Category ---------------!!!*/
+.gender-category {
+  background-color: var(--grey-light);
+  width: 100%;
+}
+
+.gender-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--separation-padding);
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  width: 80%;
+}
+
+.gender-image-item img {
+  width: 100%;
+  max-height: 350px;
+  object-fit: cover;
+}
+
+.gender-image-item a {
+  text-decoration: none;
+  font-family: "DM Serif Display", serif;
+}
+
+.gender-image-item {
+  color: var(--blue-navy);
+  color: white;
+  display: flex;
+  justify-content: center;
+  font-size: 30px;
+  flex-direction: column;
+  text-decoration: none;
+  width: calc(50% - 50px);
+  text-align: center;
+  margin-right: 50px;
+}
+
+.gender-image-item:last-child {
+  margin-right: 0;
+}
+
+.gender-image-item h2 {
+  font-weight: 400;
+  font-size: 50px;
+  color: var(--black);
+}
+
+.gender-image-item:hover {
+  cursor: pointer;
+}
+
+.gender-image-item:hover a {
+  text-decoration: underline;
+  text-decoration-color: var(--yellow);
+  text-decoration-thickness: 5px;
+}
+/*!!!----------------- End of S-2, Gender Category ---------------!!!*/
+
+/*!!!----------------- S-3, Latest  Arrivals ---------------!!!*/
+.latest {
+  width: 100%;
+  padding: var(--separation-padding);
+  background-color: var(--white);
+}
+
+.intro-latest {
+  text-align: center;
+}
+
+.latest h2 {
+  font-size: 50px;
+  font-weight: 400;
+  color: var(--black);
+}
+
+.intro-latest p {
+  max-width: 60%;
+  margin: 20px auto;
+  margin-bottom: 0;
+  line-height: 30px;
+  font-size: 20px;
+}
+
+.articles-section {
+  width: 100%;
+  padding: var(--separation-padding);
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.article-card {
+  flex-basis: 31%;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.article-info-block p {
+  margin: 18px 0;
+}
+
+.article-card h3 {
+  font-size: 22px;
+  font-weight: 400;
+  font-family: "DM Sans", sans-serif;
+  margin-bottom: 10px;
+}
+
+.article-card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  object-position: center;
+  padding: 8px;
+  border-radius: 15px;
+}
+
+.rating {
+  display: flex;
+  margin: 20px 0;
+  align-items: center;
+}
+
+.rating ul {
+  list-style: none;
+  margin-right: 10px;
+}
+
+.rating ul li {
+  display: inline-block;
+  margin-right: 1px;
+}
+
+.rating ul li i {
+  color: var(--yellow);
+}
+
+.rating span {
+  background: var(--black);
+  color: #fff;
+  padding: 1px 10px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  background: #f5f9fe;
+  border-top: 1px solid #ddd;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.article-info-block {
+  padding: 10px 15px;
+}
+
+.actions .item {
+  padding: 15px 0;
+  width: 50%;
+}
+
+.actions .item:hover {
+  background: var(--grey);
+}
+
+.actions .item:hover button,
+.actions .item:hover button i {
+  color: #fff;
+}
+
+.actions .item:first-child:hover {
+  border-right: 3px solid var(--yellow);
+  border-bottom-left-radius: 5px;
+}
+
+.actions .item:last-child:hover {
+  border-left: 3px solid var(--yellow);
+  border-bottom-right-radius: 5px;
+}
+
+.actions button {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  font-size: 16px;
+}
+/*!!!----------------- End of S-3, Latest  Arrivals ---------------!!!*/
+
+/*!!!----------------- S-4 - 'Loooks Good' & Services ---------------!!!*/
+.catalogue-container {
+  background-color: var(--yellow);
+  padding: 60px 0px;
+}
+
+.catalogue-container .pack-catalogue {
+  display: flex;
+  align-items: start;
+}
+
+.catalogue-container .pack-catalogue h4 {
+  font-size: 50px;
+  font-weight: 400;
+}
+
+.catalogue-text {
+  flex: 2;
+}
+
+.catalogue-button {
+  flex: 1;
+}
+
+.services {
+  background-color: var(--grey-light);
+  padding: 60px 0px;
+}
+
+.pack-services {
+  display: flex;
+  flex-flow: row wrap;
+  padding: var(--separation-padding);
+}
+
+.items-services {
+  width: 25%;
+  text-align: center;
+}
+
+.items-services i {
+  font-size: 45px;
+  color: var(--yellow);
+}
+
+.items-services h6 {
+  font-size: 20px;
+  margin: 10px 0;
+  font-weight: 600;
+  font-family: inherit;
+}
+/*!!!----------------- End of S-4 - 'Loooks Good' & Services ---------------!!!*/
+
+/*!!!----------------- S-5 - 'How it all started' ---------------!!!*/
+.story-store {
+  background-color: var(--white);
+}
+
+.pack-story {
+  display: flex;
+  flex-flow: row wrap;
+  padding: 70px 0px;
+}
+
+.story-image {
+  flex: 1;
+}
+
+.story-image img {
+  max-height: 360px;
+}
+
+.story-text {
+  flex: 1;
+  margin-left: 50px;
+}
+
+.story-text hr {
+  font-size: 40px;
+  width: 2.5em;
+  margin-bottom: 5px;
+  height: 3px;
+  border: none;
+  background-color: black;
+}
+
+.story-text p {
+  font-size: 20px;
+  padding-bottom: 10px;
+  line-height: 30px;
+}
+
+.story-text h2 {
+  font-size: 40px;
+  padding-bottom: 10px;
+  font-weight: normal;
+}
+/*!!!----------------- End of  S-5 - 'How it all started' ---------------!!!*/
+
+/*!!!----------------- S-6 - Partners ---------------!!!*/
+.view-partners {
+  background-color: var(--grey-light);
+  padding: 100px 0px;
+}
+
+.partners {
+  display: flex;
+  flex-flow: row wrap;
+  margin-bottom: 100px;
+}
+
+.partners-message {
+  width: 50%;
+}
+
+.partners-message p {
+  font-size: 20px;
+  line-height: 30px;
+  max-width: 90%;
+}
+
+.partners-logo {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.partners-logo img {
+  max-width: 180px;
+}
+/*!!!----------------- End of  S-6 - Partners ---------------!!!*/
+
+/*!!!-----------------Footer ---------------!!!*/
+.footer-contact {
+  padding: var(--separation-padding);
+  background-color: var(--yellow);
+}
+
+.footer-contact address {
+  font-style: normal;
+  font-size: 17px;
+}
+
+.view-contacts {
+  display: flex;
+  padding: var(--separation-padding) px;
+  flex-flow: row wrap;
+}
+
+.view-contacts h6 {
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.view-contacts hr {
+  width: 4em;
+  height: 4px;
+  border: none;
+  background-color: black;
+  margin-bottom: 15px;
+}
+
+.telephone {
+  width: 40%;
+}
+
+.e-mail {
+  width: 30%;
+}
+
+.social-media {
+  width: 30%;
+}
+
+.straight-contact,
+.tel-text a {
+  text-decoration: none;
+}
+
+.tel-text {
+  margin-top: 15px;
+  line-height: 25px;
+}
+/*!!!----------------- End of Footer ---------------!!!*/
+
+/* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@----     Media     Query    ----@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+/*!!!----------------- Media Query - 1199px-992px ---------------!!!*/
+@media all and (max-width: 1199px) {
+  .container {
+    width: 80%;
+  }
+
+  /* ***** Navigation Bar ***** !!!*/
+
+  .nav-links li a {
+    font-size: 18px;
+  }
+
+  .icon-container {
+    font-size: 20px;
+  }
+
+  .icon-badge {
+    font-family: "DM Sans", sans-serif;
+    width: 18px;
+    height: 18px;
+    font-size: 12px;
+  }
+
+  .intro-text {
+    max-width: 92%;
+  }
+
+  .intro-text p {
+    display: inline;
+  }
+
+  .intro-text h1 {
+    font-size: 5vw;
+    line-height: 1.2;
+  }
+
+  .introduction .ecm-button {
+    margin-top: 15px;
+  }
+  /* ***** End of Navigation Bar ***** !!!*/
+
+  /* ***** Gender Category ***** !!!*/
+  .gender-image-item {
+    width: calc(50% - 0px);
+    margin-right: 0px;
+  }
+
+  .gender-image-item img {
+    width: 93%;
+  }
+
+  .gender-image-item h2 {
+    font-size: 45px;
+  }
+
+  .latest h2 {
+    font-size: 60px;
+  }
+  /* ***** End of Gender Category ***** !!!*/
+
+  /* ***** Latest  Arrivals ***** !!!*/
+  .intro-latest p {
+    max-width: 72%;
+    margin: 25px auto;
+    color: var(--grey);
+    font-size: 18px;
+  }
+  /* ***** End of Latest  Arrivals ***** !!!*/
+
+  /* ***** 'Loooks Good' & Services ***** !!!*/
+  .catalogue-text {
+    margin-right: 20px;
+  }
+
+  .catalogue-container .pack-catalogue h4 {
+    font-size: 45px;
+  }
+
+  .items-services h6 {
+    font-size: 21px;
+    margin: 15px 0;
+  }
+
+  .items-services p {
+    font-size: 15px;
+    line-height: 1.5rem;
+    max-width: 73%;
+    margin: auto;
+  }
+
+  .items-services h6 {
+    max-width: 69%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  /* ***** End of 'Loooks Good' & Services ***** !!!*/
+
+  /* ***** 'How it all started' ***** !!!*/
+  .story-text p {
+    font-size: 1.7vw;
+  }
+
+  .story-text h2 {
+    padding-bottom: 25px;
+  }
+
+  .story-image img {
+    max-width: 480px;
+  }
+  /* ***** End of 'How it all started' ***** !!!*/
+
+  /* ***** Partners ***** !!!*/
+  .partners-logo img {
+    max-width: 150px;
+  }
+
+  .partners-message p {
+    font-size: 1.6vw;
+  }
+  /* ***** End of Partners ***** !!!*/
+
+  /* ***** Footer ***** !!!*/
+  .view-contacts h6 {
+    font-size: 2vw;
+  }
+
+  .view-contacts hr {
+    width: 4vw;
+  }
+
+  .telephone {
+    width: 33.3%;
+  }
+
+  .e-mail {
+    width: 33.3%;
+  }
+
+  .social-media {
+    width: 33.3%;
+  }
+
+  .footer-contact address {
+    font-size: 1.3vw;
+  }
+
+  .tel-text {
+    overflow: visible;
+    white-space: nowrap;
+  }
+
+  .footer-contact {
+    padding: 30px 0px;
+  }
+  /* ***** End of Footer ***** !!!*/
+}
+/*!!!----------------- End of Media Query - 1199.98-992px ---------------!!!*/
+
+/*!!!----------------- Media Query -  991.98px - 768px ---------------!!!*/
+@media all and (max-width: 991.98px) {
+  .container {
+    max-width: 70%;
+  }
+  /* ***** Presentation Header ***** !!!*/
+  header {
+    height: 100%;
+  }
+
+  .cover {
+    height: 100%;
+  }
+
+  .presentation {
+    height: 100%;
+  }
+
+  .introduction {
+    width: 100%;
+  }
+
+  img {
+    width: 100%;
+  }
+  /* ***** End of Presentation Header ***** !!!*/
+
+  /* ***** Hamburger Meniu ***** !!!*/
+  nav {
+    position: relative;
+  }
+
+  .hamburger {
+    position: absolute;
+    cursor: pointer;
+    left: -37px;
+    top: 50%;
+    transform: translate(-5%, -50%);
+    z-index: 2;
+  }
+
+  .hamburger.open .line {
+    background: var(--yellow);
+  }
+
+  .hamburger img {
+    width: 32px;
+  }
+
+  .logo-container img {
+    margin-left: 10px;
+  }
+
+  .nav-links {
+    position: fixed;
+    background: var(--grey-light);
+    height: 100vh;
+    flex-direction: column;
+    clip-path: circle(100px at 110% -10%);
+    -webkit-clip-path: circle(100px at 110% -10%);
+    transition: all 1s ease-out;
+    pointer-events: none;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+  }
+
+  .nav-links.open {
+    clip-path: circle(1500px at 90% -10%);
+    -webkit-clip-path: circle(1300px at 90% 
+    -10%);
+    pointer-events: all;
+    z-index: 1;
+  }
+
+  .nav-links li {
+    opacity: 0;
+  }
+
+  .nav-links li a {
+    font-size: 25px;
+  }
+
+  .nav-links li:nth-child(1) {
+    transition: all 0.5s ease 0.2s;
+  }
+
+  .nav-links li:nth-child(2) {
+    transition: all 0.5s ease 0.4s;
+  }
+
+  .nav-links li:nth-child(3) {
+    transition: all 0.5s ease 0.6s;
+  }
+
+  li.fade {
+    opacity: 1;
+  }
+
+  li.fade a {
+    color: var(--black);
+  }
+  /* ***** End of Hamburger Meniu ***** !!!*/
+
+  /* ***** Presentation Header ***** !!!*/
+  .introduction {
+    max-width: none;
+    flex: 0 1 auto;
+    text-align: center;
+  }
+
+  .intro-text {
+    max-width: 100%;
+  }
+
+  .intro-text h1 {
+    line-height: 5.4rem;
+    font-size: 5.7vh;
+  }
+
+  .intro-text p {
+    font-size: 2.15vh;
+    color: var(--blue-navy);
+  }
+
+  .introduction .ecm-button {
+    margin-top: 30px;
+  }
+
+  .cover {
+    flex: 0 1 auto;
+  }
+
+  .cover img {
+    width: 102%;
+  }
+  /* ***** End of Presentation Header ***** !!!*/
+
+  /* ***** Gender Category ***** !!!*/
+  .gender-category {
+    padding: 30px 0px;
+  }
+
+  .gender-image-item img {
+    width: 95%;
+  }
+
+  .gender-image-item h2 {
+    font-size: 40px;
+  }
+
+  .gender-image-item h2 {
+    font-size: 4.5vh;
+  }
+  /* ***** End of Gender Category ***** !!!*/
+
+  /* ***** Latest  Arrivals ***** !!!*/
+  .intro-latest p {
+    max-width: 89%;
+    margin: 25px auto;
+    font-size: 2.1vh;
+    color: var(--grey);
+    font-size: 18px;
+  }
+
+  .latest h2 {
+    font-size: 5.3vh;
+  }
+
+  .articles-section {
+    display: flex;
+    flex-flow: row wrap;
+  }
+
+  .article-card {
+    flex-basis: 48%;
+    margin-bottom: 20px;
+  }
+
+  .article-card img {
+    height: 270px;
+  }
+
+  .article-info-block p {
+    line-height: 22px;
+  }
+
+  .rating span {
+    padding: 3px 10px;
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  .rating {
+    font-size: 15px;
+  }
+
+  .actions button {
+    font-size: 15px;
+  }
+  /* ***** End of Latest  Arrivals ***** !!!*/
+
+  /* ***** 'Loooks Good' & Services ***** !!!*/
+  .catalogue-container .pack-catalogue {
+    display: block;
+  }
+
+  .catalogue-text {
+    max-width: 75%;
+  }
+
+  .catalogue-container .pack-catalogue h4 {
+    font-size: 35px;
+  }
+
+  .items-services i {
+    font-size: 38px;
+  }
+
+  .items-services h6 {
+    max-width: 80%;
+  }
+
+  .items-services h6 {
+    font-size: 2.16vw;
+  }
+
+  .items-services p {
+    font-size: 87%;
+  }
+  /* ***** End of 'Loooks Good' & Services ***** !!!*/
+
+  /* ***** 'How it all started' ***** !!!*/
+  .story-image {
+    display: none;
+  }
+
+  .story-text {
+    margin-left: 0px;
+  }
+
+  .story-text hr {
+    width: 12vw;
+  }
+
+  .story-text h2 {
+    padding-bottom: 2vw;
+  }
+
+  .story-text p {
+    font-size: 1.7vw;
+  }
+  /* ***** End of 'How it all started' ***** !!!*/
+
+  /* ***** Partners ***** !!!*/
+  .partners-message p {
+    font-size: 2vw;
+  }
+  /* ***** End of Partners ***** !!!*/
+
+  /* ***** Footer ***** !!!*/
+  .telephone,
+  .e-mail,
+  .social-media {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .tel-text {
+    margin-top: -13px;
+  }
+
+  .view-contacts h6 {
+    font-size: 2.2vw;
+  }
+
+  .footer-contact address {
+    font-size: 1.6vw;
+  }
+  /* ***** End of Footer ***** !!!*/
+}
+/*!!!----------------- End of Media Query - 991.98px - 768px ---------------!!!*/
+
+/*!!!----------------- Media Query -  767.98px - 576px ---------------!!!*/
+@media all and (max-width: 767.98px) {
+  /* ***** Presentation Header ***** !!!*/
+  .presentation {
+    margin-top: 2em;
+  }
+
+  .intro-text h1 {
+    line-height: 1.2;
+  }
+
+  .nav-links {
+    clip-path: circle(70px at 110% -10%);
+  }
+  /* ***** End of Presentation Header ***** !!!*/
+
+  /* ***** Gender Category ***** !!!*/
+  .gender-container {
+    flex-flow: column wrap;
+  }
+
+  .gender-image-item {
+    width: 100%;
+  }
+
+  .gender-image-item img {
+    width: 100%;
+  }
+
+  .gender-image-item:first-child {
+    margin-bottom: 50px;
+  }
+  /* ***** End of Gender Category ***** !!!*/
+
+  /* ***** Latest  Arrivals ***** !!!*/
+  .article-card {
+    align-self: center;
+  }
+
+  .intro-latest p {
+    font-size: 2.2vh;
+  }
+
+  .latest h2 {
+    margin-bottom: 40px;
+  }
+
+  .articles-section {
+    flex-flow: column wrap;
+  }
+
+  .catalogue-text {
+    max-width: 90%;
+  }
+
+  .catalogue-container .pack-catalogue h4 {
+    font-size: 4.1vh;
+  }
+  /* ***** End of Latest  Arrivals ***** !!!*/
+
+  /* ***** 'Loooks Good' & Services ***** !!!*/
+  .items-services {
+    width: 50%;
+  }
+
+  .items-services:first-child,
+  .items-services:nth-child(2) {
+    margin-bottom: 40px;
+  }
+
+  .items-services i {
+    font-size: 40px;
+  }
+
+  items-services h6 {
+    font-size: 2.8vw;
+  }
+
+  .items-services p {
+    max-width: 80%;
+    font-size: 90%;
+  }
+
+  .items-services h6 {
+    font-size: 2.7vw;
+  }
+  /* ***** End of 'Loooks Good' & Services ***** !!!*/
+
+  /* ***** 'How it all started' ***** !!!*/
+  .story-text h2 {
+    font-size: 4.8vw;
+  }
+
+  .story-text p {
+    font-size: 2.2vw;
+  }
+  /* ***** End of 'How it all started' ***** !!!*/
+
+  /* ***** Partners ***** !!!*/
+  .partners-logo {
+    width: 100%;
+    order: 1;
+    padding-bottom: 25px;
+  }
+
+  .partners-message {
+    width: 100%;
+    order: 2;
+    text-align: center;
+  }
+
+  .partners-logo:nth-child(odd) {
+    order: 3;
+    padding-bottom: 0px;
+    padding-top: 25px;
+  }
+
+  .partners-message p {
+    max-width: 100%;
+    font-size: 2.5vw;
+  }
+
+  .partners:last-child {
+    margin-bottom: 0px;
+  }
+  /* ***** End of Partners ***** !!!*/
+
+  /* ***** Footer ***** !!!*/
+  .view-contacts h6 {
+    font-size: 2.8vw;
+  }
+
+  .footer-contact address {
+    font-size: 2.1vw;
+  }
+
+  .view-contacts hr {
+    width: 6vw;
+  }
+  /* ***** End of Footer ***** !!!*/
+}
+/*!!!----------------- End of Media Query - 576px - 767.98px ---------------!!!*/
+
+/*!!!----------------- Media Query -  575.98px - 0px ---------------!!!*/
+@media all and (max-width: 575.98px) {
+  body {
+    min-width: 300px;
+    min-height: 570px;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 95%;
+  }
+
+  /* ***** Presentation Header ***** !!!*/
+  header {
+    padding: 10px 10px;
+  }
+
+  header nav {
+    padding-left: 30px;
+  }
+
+  .hamburger {
+    left: 5px;
+  }
+
+  .logo-container img {
+    min-width: 65px;
+    width: 27%;
+  }
+
+  .hamburger img {
+    min-width: 30px;
+    width: 4vw;
+  }
+
+  .nav-links {
+    clip-path: circle(50px at 110% -10%);
+  }
+
+  .icon-container {
+    min-width: 14px;
+    font-size: calc(12px + 1.1vw);
+  }
+
+  .icon-badge {
+    width: 15px;
+    height: 15px;
+    font-size: calc(8px + 0.4vw);
+    right: calc(1px + 1vw);
+  }
+
+  .nav-icons i {
+    padding: 0px calc(4px + 1vw);
+  }
+
+  .intro-text h1 {
+    line-height: 105%;
+    font-size: calc(30px + 1.7vh);
+  }
+
+  .intro-text p {
+    font-size: calc(10px + 0.8vh);
+  }
+
+  .ecm-button {
+    width: calc(100px + 13.6vw);
+    height: 53px;
+  }
+  /* ***** End of Presentation Header ***** !!!*/
+
+  /* ***** Gender Category ***** !!!*/
+  .gender-image-item h2 {
+    font-size: calc(25px + 2vh);
+  }
+  /* ***** End of Gender Category ***** !!!*/
+
+  /* ***** Latest  Arrivals ***** !!!*/
+  .intro-latest p {
+    max-width: 99%;
+    font-size: calc(10px + 1.1vh);
+  }
+
+  .latest h2 {
+    font-size: calc(35px + 1.5vh);
+  }
+  /* ***** End of Latest  Arrivals ***** !!!*/
+
+  /* ***** 'Loooks Good' & Services ***** !!!*/
+  .catalogue-container .pack-catalogue h4 {
+    font-size: calc(30px + 0.6vh);
+  }
+
+  .items-services {
+    width: 100%;
+  }
+
+  .items-services:nth-child(3) {
+    margin-bottom: 40px;
+  }
+
+  .items-services h6 {
+    font-size: 120%;
+  }
+
+  .items-services p {
+    font-size: 93%;
+  }
+  /* ***** End of 'Loooks Good' & Services ***** !!!*/
+
+  /* ***** 'How it all started' ***** !!!*/
+  .story-text h2 {
+    font-size: 220%;
+  }
+
+  .story-text hr {
+    width: 20%;
+  }
+
+  .story-text p {
+    font-size: 105%;
+  }
+  /* ***** End of 'How it all started' ***** !!!*/
+
+  /* ***** Partners ***** !!!*/
+  .partners-message p {
+    font-size: 110%;
+  }
+  /* ***** End of Partners ***** !!!*/
+
+  /* ***** Footer ***** !!!*/
+  .view-contacts h6 {
+    font-size: calc(15px + 0.7vh);
+  }
+
+  .view-contacts hr {
+    width: calc(35px + 1vh);
+  }
+
+  .footer-contact address {
+    font-size: calc(10px + 0.6vh);
+  }
+
+  .e-mail .footer-heading-line {
+    width: 50%;
+  }
+
+  .tel-text {
+    white-space: normal;
+  }
+
+  .telephone,
+  .e-mail,
+  .social-media {
+    flex-flow: row wrap;
+  }
+  /* ***** End of Footer ***** !!!*/
+}
+/*!!!----------------- End of Media Query - 575.98px - 0px ---------------!!!*/
