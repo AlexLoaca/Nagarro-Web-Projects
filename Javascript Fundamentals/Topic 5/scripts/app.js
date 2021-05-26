@@ -1,8 +1,7 @@
 import * as vendor from "./vendor.js";
 import * as apiRequest from "./httpRequests.js";
 import * as showAlert from "./toast.js";
-// showAlert.Toast.init();
-// showAlert.Toast.show('message','success');
+
 // Array to keep courses
 const listOfCourses = [];
 let listOfStudents = [];

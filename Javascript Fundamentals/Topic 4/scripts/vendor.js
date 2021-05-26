@@ -127,7 +127,7 @@ function Course(id, name, assignedTeacher) {
     address = null,
     hobbies = null
   ) {
-      if (arguments.length < 4) throw "Required property is missing";
+      if (!id || !firstName || !lastName || !gender) throw "Required property is missing";
       if (
         typeof id !== "number" ||
         typeof firstName !== "string" ||

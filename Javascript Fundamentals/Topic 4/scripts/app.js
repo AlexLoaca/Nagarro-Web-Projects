@@ -1,4 +1,5 @@
 import * as vendor from "./vendor.js";
+import * as showAlert from "./toast.js";
 
 // Array to keep courses
 const listOfCourses = [];
@@ -98,10 +99,23 @@ const addCourseHandler = () => {
     newCourse = new vendor.Course(id, courseName, assignedTeacher);
     console.log(newCourse);
   } catch (error) {
+    const showError = document.getElementById("show-error-course");
+    const wrapperError = showError.closest(".errors-wrapper");
+    showError.textContent = `${error}`;
+    wrapperError.classList.add("visible");
+    setTimeout(() => {
+      wrapperError.classList.remove("visible");
+    }, 4000);
+
     return console.error(error);
   }
 
   listOfCourses.push(newCourse);
+
+  showAlert.Toast.show(
+    `The ${newCourse.name} course has been created.`,
+    "success"
+  );
 
   const newLi = document.createElement("li");
   newLi.textContent = newCourse.name;
@@ -190,21 +204,25 @@ function selectValueHasChanged() {
     currentCourse.addStudent(student);
     updateStudentsTable(currentCourse);
     updateStudentsDropdown(currentCourse);
+    showAlert.Toast.show(
+      `${student.lastName} joined the ${currentCourse.name} course.`,
+      "success"
+    );
   }
 }
 
 const createStudentHandler = () => {
-  const id = parseInt(inputsOfNewStudent[0].value);
-  const firstName = inputsOfNewStudent[1].value;
-  const lastName = inputsOfNewStudent[2].value;
+  const id = parseInt(inputsOfNewStudent[0].value.trim());
+  const firstName = inputsOfNewStudent[1].value.trim();
+  const lastName = inputsOfNewStudent[2].value.trim();
   const gender = inputsOfNewStudent[3].checked
-    ? inputsOfNewStudent[3].value
-    : inputsOfNewStudent[4].value;
-  const address = inputsOfNewStudent[5].value
-    ? inputsOfNewStudent[5].value
+    ? inputsOfNewStudent[3].value.trim()
+    : inputsOfNewStudent[4].value.trim();
+  const address = inputsOfNewStudent[5].value.trim()
+    ? inputsOfNewStudent[5].value.trim()
     : null;
-  const hobbies = inputsOfNewStudent[6].value
-    ? inputsOfNewStudent[6].value
+  const hobbies = inputsOfNewStudent[6].value.trim()
+    ? inputsOfNewStudent[6].value.trim()
     : null;
   let newStudent;
 
@@ -217,15 +235,26 @@ const createStudentHandler = () => {
       address,
       hobbies
     );
+    console.log(newStudent);
   } catch (error) {
+    const showError = document.getElementById("show-error");
+    const wrapperError = showError.closest(".errors-wrapper");
+    showError.textContent = `${error}`;
+    wrapperError.classList.add("visible");
+    setTimeout(() => {
+      wrapperError.classList.remove("visible");
+    }, 4000);
+
     return console.error(error);
   }
 
   listOfStudents.push(newStudent);
-
   cancelcreateStudentHandler();
-
   updateStudentsDropdown(currentCourse);
+  showAlert.Toast.show(
+    `Student ${newStudent.lastName} was created.`,
+    "success"
+  );
 };
 
 const removeStudentHandler = (studentId) => {
@@ -235,9 +264,14 @@ const removeStudentHandler = (studentId) => {
       `Are you sure you want to remove student ${studentId} from course ${currentCourse.name}?`
     )
   ) {
+    const updatedStudent = listOfStudents.find((el) => el.id === studentId);
     currentCourse.deleteStudent(studentId);
     updateStudentsDropdown(currentCourse);
     updateStudentsTable(currentCourse);
+    showAlert.Toast.show(
+      `${updatedStudent.lastName} no longer attends ${currentCourse.name} classes.`,
+      "success"
+    );
   } else {
     console.log("you changed your mind");
   }
@@ -257,4 +291,6 @@ confirmAddStudentButton.addEventListener("click", createStudentHandler);
 dropDownStudentSelect.addEventListener("change", selectValueHasChanged);
 window.onload = () => {
   updateUi();
+  showAlert.Toast.init();
 };
+
