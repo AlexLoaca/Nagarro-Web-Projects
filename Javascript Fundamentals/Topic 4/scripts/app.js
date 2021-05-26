@@ -159,7 +159,9 @@ const updateStudentsTable = (navSelectedCourse) => {
     const genderCell = row.insertCell(3);
     const addressCell = row.insertCell(4);
     const hobbiesCell = row.insertCell(5);
-    const removeBtnCell = row.insertCell(6);
+    const actions = row.insertCell(6);
+    const deleteIcon = document.createElement("I");
+    deleteIcon.classList = "fas fa-user-slash";
 
     idCell.innerHTML = student.id;
     firstNameCell.innerHTML = student.firstName;
@@ -167,9 +169,9 @@ const updateStudentsTable = (navSelectedCourse) => {
     genderCell.innerHTML = student.gender;
     addressCell.innerHTML = student.address;
     hobbiesCell.innerHTML = hobbies;
-    removeBtnCell.innerHTML = '<i class="fas fa-user-slash"></i>';
+    actions.appendChild(deleteIcon);
 
-    removeBtnCell.addEventListener("click", () =>
+    deleteIcon.addEventListener("click", () =>
       removeStudentHandler(student.id)
     );
   }
@@ -293,4 +295,3 @@ window.onload = () => {
   updateUi();
   showAlert.Toast.init();
 };
-
